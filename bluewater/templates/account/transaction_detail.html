@@ -1,0 +1,16 @@
+{% extends 'header-footer.html' %}
+{% load static %}
+{% block title %}bdtechnicalschools/course-details{% endblock title %}
+
+{% block content %}
+<h1>Order Confirmation</h1>
+
+<p>Transaction ID: {{ transaction.transaction_id }}</p>
+<p>Amount: {{ transaction.amount }}</p>
+<p>Name: {{ transaction.first_name }} {{ transaction.last_name }}</p>
+<p>Mobile: {{ transaction.mobile }}</p>
+<p>Address: {{ transaction.address }}</p>
+<p>City: {{ transaction.city }}</p>
+<p>Payment Status: {{ transaction.payment_status }}</p>
+
+{% endblock content %}

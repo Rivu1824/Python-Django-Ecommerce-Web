@@ -1,0 +1,467 @@
+{% extends 'header-footer.html' %}
+{% load static %}
+{% block title %}bdtechnicalschools/home{% endblock title %}
+
+{% block content %}
+        <!-- ========== MAIN CONTENT ========== -->
+        <main id="content" role="main">
+            <!-- Slider & Banner Section -->
+            <div class="mb-4">
+                {% if messages %}
+                <ul>
+                  {% for message in messages %}
+                  <li class="{% if message.tags %}alert {{ message.tags }}{% else %}text-info{% endif %}">
+                    {{ message }}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="container overflow-hidden">
+                    <div class="row">
+                        <!-- Slider -->
+                        
+                        <div class="col-xl pr-xl-2 mb-4 mb-xl-0">
+                            <div class="bg-img-hero mr-xl-1 height-410-xl max-width-1060-wd max-width-830-xl overflow-hidden" style="background-image: url({{ logo.background_image.url }});">
+                                <div class="js-slick-carousel u-slick"
+                                    data-autoplay="true"
+                                    data-speed="7000"
+                                    data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start ml-9 mb-3 mb-md-5">
+                                    {% for banner in banners %}
+                                    <div class="js-slide bg-img-hero-center">
+                                        <div class="row height-410-xl py-7 py-md-0 mx-0">
+                                            <div class="d-none d-wd-block offset-1"></div>
+                                            <div class="col-xl col-6 col-md-6 mt-md-8">
+                                                <h1 class="font-size-64 text-lh-57 font-weight-light"
+                                                    data-scs-animation-in="fadeInUp">
+                                                    THE NEW <span class="d-block font-size-55">{{ banner.title }}</span>
+                                                </h1>
+                                                <h6 class="font-size-15 font-weight-bold mb-3"
+                                                    data-scs-animation-in="fadeInUp"
+                                                    data-scs-animation-delay="200">{{ banner.sub_title }}
+                                                </h6>
+                                                <a href="../shop/single-product-fullwidth.html" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                                    data-scs-animation-in="fadeInUp"
+                                                    data-scs-animation-delay="400">
+                                                    Start Buying
+                                                </a>
+                                            </div>
+                                            <div class="col-xl-7 col-6 d-flex align-items-center ml-auto ml-md-0"
+                                                data-scs-animation-in="zoomIn"
+                                                data-scs-animation-delay="500">
+                                                <img class="img-fluid" src="{{ banner.image.url }}" alt="{{ banner.title }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Slider -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Deals of The Day -->
+                <div class="mb-3">
+                    <div class="d-flex border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-sm-bottom-0 mb-2 mb-md-0">
+                        <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Deals of The Day</h3>
+                        <div class="js-countdown ml-md-5 mt-md-n1 border-top border-color-1 border-md-top-0 w-100 w-md-auto pt-2 pt-md-0 mb-2 mb-md-0"
+                            data-end-date="2020/11/30"
+                            data-hours-format="%H"
+                            data-minutes-format="%M"
+                            data-seconds-format="%S">
+                        </div>
+                        <a class="ml-md-auto d-block text-gray-16 align-self-center" href="../shop/product-categories-7-column-full-width.html">Go to Daily Deals Section <i class="ec ec-arrow-right-categproes"></i></a>
+                    </div>
+                    <div class="js-slick-carousel u-slick overflow-hidden u-slick-overflow-visble pt-3 pb-6 px-1"
+                        data-pagi-classes="text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-4"
+                        data-slides-show="7"
+                        data-slides-scroll="1"
+                        data-responsive='[{
+                          "breakpoint": 1400,
+                          "settings": {
+                            "slidesToShow": 5
+                          }
+                        }, {
+                            "breakpoint": 1200,
+                            "settings": {
+                              "slidesToShow": 4
+                            }
+                        }, {
+                          "breakpoint": 992,
+                          "settings": {
+                            "slidesToShow": 4
+                          }
+                        }, {
+                          "breakpoint": 768,
+                          "settings": {
+                            "slidesToShow": 3
+                          }
+                        }, {
+                          "breakpoint": 554,
+                          "settings": {
+                            "slidesToShow": 2
+                          }
+                        }]'>
+                        {% for product in products %}
+                        <div class="js-slide products-group">
+                            <div class="product-item">
+                                <div class="product-item__outer h-100">
+                                    <div class="product-item__inner px-wd-4 p-2 p-md-3">
+                                        <div class="product-item__body pb-xl-2">
+                                            <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
+                                            <h5 class="mb-1 product-item__title"><a href="{% url 'product_detail' pk=product.pk %}" class="text-blue font-weight-bold">{{ product.title }}</a></h5>
+                                            <div class="mb-2">
+                                                <a href="{% url 'product_detail' pk=product.pk %}" class="d-block text-center"><img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}" style="width: 260px; height: 220px;"></a>
+                                            </div>
+                                            <div class="flex-center-between mb-1">
+                                                <div class="prodcut-price">
+                                                    <div class="text-gray-100">${{ product.total_price }}</div>
+                                                </div>
+                                                <form method="post" action="{% url 'add_to_cart' pk=product.pk %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_id" value="{{ product.pk }}">
+                                                    <button type="submit" class="btn-add-cart btn-primary transition-3d-hover">
+                                                        <i class="ec ec-add-to-cart"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}                    
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="js-slick-carousel u-slick"
+                        data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-center mb-0 pb-4 pb-xl-14">
+                        {% for banner in banners %}
+                        <div class="js-slide bg-img-hero-center">
+                            <div class="bg-img-hero pt-xl-18 pt-10" style="background-image: url({{ banner.image.url }});">
+                                <div class="container">
+                                    <div class="row py-7 py-md-0 mt-md-8 mb-md-18 pb-xl-4 d-inline-flex w-100">
+                                        <div class="col-md-6 offset-xl-1">
+                                            <h1 class="font-size-58-sm text-lh-57 mb-3 font-weight-light"
+                                                data-scs-animation-in="fadeInUp">
+                                                {{ banner.title }}
+                                            </h1>
+                                            <div class="mb-6"
+                                                data-scs-animation-in="fadeInUp"
+                                                data-scs-animation-delay="200">
+                                                {{ banner.sub_title }}
+                                            </div>
+                                            <div class="mb-6"
+                                            data-scs-animation-in="fadeInUp"
+                                            data-scs-animation-delay="200">
+                                            {{ banner.description }}
+                                        </div>
+                                            <a href="../shop/single-product-fullwidth.html" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                                data-scs-animation-in="fadeInUp"
+                                                data-scs-animation-delay="300">
+                                                Start Buying
+                                            </a>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            <!-- Week Deals limited -->
+            <div class="bg-gray-7 mb-6 py-7 pt-xl-15 pb-xl-7">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-4 col-lg-3 mb-6 mb-md-0">
+                            <h1 class="font-size-42 text-lh-38 mb-3 font-weight-light"
+                                data-scs-animation-in="fadeInUp">
+                                OUTLET DEALS <span class="d-block font-size-42">CLEARANCE</span>
+                            </h1>
+                            <div class="mb-6"
+                                data-scs-animation-in="fadeInUp"
+                                data-scs-animation-delay="200">
+                                <span class="font-size-15 font-weight-bold">SAVE UP TO</span>
+                                <span class="font-size-sl-48 font-weight-bold text-lh-45">
+                                    70<sup class="font-size-36">%</sup><sub class="font-size-16">OFF!</sub>
+                                </span>
+                            </div>
+                            <a href="../shop/single-product-fullwidth.html" class="btn btn-primary transition-3d-hover rounded-lg font-weight-normal py-2 px-md-7 px-3 font-size-16"
+                                data-scs-animation-in="fadeInUp"
+                                data-scs-animation-delay="300">
+                                Start Buying
+                            </a>
+                        </div>
+                        <div class="col-md-8 col-lg-9">
+                            <div class="">
+                                <div class="js-slick-carousel u-slick position-static overflow-hidden u-slick-overflow-visble pb-5 pt-2 px-1"
+                                    data-pagi-classes="text-center d-xl-none right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-3 pt-1"
+                                    data-arrows-classes="d-none d-xl-inline-block u-slick__arrow-normal u-slick__arrow-centered--y font-size-25"
+                                    data-arrow-left-classes="fas fa-chevron-left left-n16 u-slick__arrow-classic-inner--left z-index-9"
+                                    data-arrow-right-classes="fas fa-chevron-right right-n16 u-slick__arrow-classic-inner--right"
+                                    data-slides-show="5"
+                                    data-slides-scroll="1"
+                                    data-responsive='[{
+                                      "breakpoint": 1400,
+                                      "settings": {
+                                        "slidesToShow": 4
+                                      }
+                                    }, {
+                                        "breakpoint": 1200,
+                                        "settings": {
+                                          "slidesToShow": 3
+                                        }
+                                    }, {
+                                      "breakpoint": 992,
+                                      "settings": {
+                                        "slidesToShow": 2
+                                      }
+                                    }, {
+                                      "breakpoint": 768,
+                                      "settings": {
+                                        "slidesToShow": 2
+                                      }
+                                    }, {
+                                      "breakpoint": 554,
+                                      "settings": {
+                                        "slidesToShow": 2
+                                      }
+                                    }]'>
+                                    {% for product in products %}
+                                    {% if product.level == 'P' %}
+                                    <div class="js-slide products-group">
+                                        <div class="product-item mx-1 remove-divider">
+                                            <div class="product-item__outer h-100">
+                                                <div class="product-item__inner bg-white px-wd-4 p-2 p-md-3">
+                                                    <div class="product-item__body pb-xl-2">
+                                                        <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">{{ product.categories.name }}</a></div>
+                                                        <h5 class="mb-1 product-item__title"><a href="{% url 'product_detail' product.id %}" class="text-blue font-weight-bold">{{ product.title }}</a></h5>
+                                                        <div class="mb-2">
+                                                            <a href="{% url 'product_detail' product.id %}" class="d-block text-center"><img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}"></a>
+                                                        </div>
+                                                        <div class="flex-center-between mb-1">
+                                                            <div class="prodcut-price">
+                                                                <div class="text-gray-100">$685,00</div>
+                                                            </div>
+                                                            <div class="d-none d-xl-block prodcut-add-cart">
+                                                                <a href="../shop/single-product-fullwidth.html" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Week Deals limited -->
+                <!-- Music Headphones -->
+                <div class="container">
+                    <div class="mb-6">
+                        <!-- Nav nav-pills -->
+                        <div class="position-relative text-center z-index-2">
+                            <div class=" d-flex justify-content-between border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-md-down-bottom-0">
+                                <h3 class="section-title mb-0 pb-2 font-size-22">Music Headphones</h3>
+                            </div>
+                        </div>
+                        <!-- End Nav Pills -->
+                        <div class="row">
+                            <div class="col-12 col-xl-auto pr-lg-2">
+                                <div class="min-width-200 mt-xl-5">
+                                    <ul class="list-group list-group-flush flex-nowrap flex-xl-wrap flex-row flex-xl-column overflow-auto overflow-xl-visble mb-3 mb-xl-0 border-top border-color-1 border-lg-top-0">
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Earbuds and In-ear</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Headphones</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Kids' Headphones</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Over-Ear and On-Ear</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">PC Gaming Headsets</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Pro &amp; DJ Headset</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Refurbished Headset</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Waterproof Headset</a></li>
+                                        <li class="border-color-1 list-group-item border-lg-down-0 flex-shrink-0 flex-xl-shrink-1"><a class="hover-on-bold py-1 px-3 text-gray-90 d-block" href="../shop/product-categories-7-column-full-width.html">Wireless and Bluetooth</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-auto">
+                                <a href="../shop/shop.html" class="d-block"><img class="img-fluid" src="../../assets/img/360X616/img2.jpg" alt="Image Description"></a>
+                            </div>
+                            <div class="col-md pl-md-0">
+                                <ul class="row list-unstyled products-group no-gutters mb-0">
+                                    {% for product in products %}
+                                        {% if product.level == 'D' %}
+                                            <li class="col-6 col-md-4 col-wd-3 product-item">
+                                                <div class="product-item__outer h-100">
+                                                    <div class="product-item__inner bg-white p-3">
+                                                        <div class="product-item__body pb-xl-2">
+                                                            <div class="mb-2"><a href="" class="font-size-12 text-gray-5">{{ product.categories.name }}</a></div>
+                                                            <h5 class="mb-1 product-item__title"><a href="" class="text-blue font-weight-bold">{{ product.title }}</a></h5>
+                                                            <div class="mb-2">
+                                                                <a href="" class="d-block text-center"><img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}"></a>
+                                                            </div>
+                                                            <div class="flex-center-between mb-1">
+                                                                <div class="prodcut-price">
+                                                                    <div class="text-gray-100">${{ product.price }}</div>
+                                                                </div>
+                                                                <div class="d-none d-xl-block prodcut-add-cart">
+                                                                    <a href="" class="btn-add-cart btn-primary transition-3d-hover"><i class="ec ec-add-to-cart"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- End Music Headphones -->
+            <!-- Slider Section -->
+            <div class="mb-4">
+                <div class="bg-img-hero" style="background-image: url({{ logo.nav_image.url }});">
+                    <div class="container min-height-420 overflow-hidden">
+                        <div class="js-slick-carousel u-slick"
+                            data-pagi-classes="text-center position-absolute right-0 bottom-0 left-0 u-slick__pagination u-slick__pagination--long justify-content-start mb-3 mb-md-4 offset-xl-3 pl-2 pb-1">
+                            {% for categorie in categories %}
+                                <div class="js-slide bg-img-hero-center">
+                                    <div class="row min-height-420 py-7 py-md-0">
+                                        <div class="offset-xl-3 col-xl-4 col-6 mt-md-8">
+                                            <h1 class="font-size-64 text-lh-57 font-weight-light" data-scs-animation-in="fadeInUp">
+                                                {{ categorie.title }}
+                                            </h1>
+                                            <h6 class="font-size-15 font-weight-bold mb-3" data-scs-animation-in="fadeInUp"
+                                                data-scs-animation-delay="200">{{ categorie.description }}
+                                            </h6>
+                                        </div>
+                                        <div class="col-xl-5 col-6 d-flex align-items-center" data-scs-animation-in="zoomIn"
+                                            data-scs-animation-delay="500">
+                                            <img class="img-fluid" src="{{ categorie.image.url }}" alt="{{ categorie.title }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>        
+            <!-- End Slider Section -->
+                    <!-- Tab Prodcut Section -->
+                    <div class="mb-6">
+                        <!-- Nav Classic -->
+                        <div class="position-relative bg-white text-center z-index-2">
+                            <ul class="nav nav-classic nav-tab justify-content-center" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active js-animation-link" id="pills-one-example1-tab" data-toggle="pill" href="#pills-one-example1" role="tab" aria-controls="pills-one-example1" aria-selected="true"
+                                        data-target="#pills-two-example1"
+                                        data-link-group="groups"
+                                        data-animation-in="slideInUp">
+                                        <div class="d-md-flex justify-content-md-center align-items-md-center">
+                                            On Sale
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-animation-link" id="pills-three-example1-tab" data-toggle="pill" href="#pills-three-example1" role="tab" aria-controls="pills-three-example1" aria-selected="false"
+                                        data-target="#pills-three-example1"
+                                        data-link-group="groups"
+                                        data-animation-in="slideInUp">
+                                        <div class="d-md-flex justify-content-md-center align-items-md-center">
+                                            Top Rated
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End Nav Classic -->
+                        <!-- Tab Content -->
+                        <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab" data-target-group="groups">
+                            <ul class="row list-unstyled products-group no-gutters">
+                                {% for product in products|slice:":6" %}
+                                {% if product.level == 'D' %}
+                                <li class="col-6 col-md-4 col-lg-3 col-xl product-item">
+                                    <div class="product-item__outer h-100">
+                                        <div class="product-item__inner px-xl-4 p-3">
+                                            <div class="product-item__body pb-xl-2">
+                                                <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">{{ product.categories }}</a></div>
+                                                <h5 class="mb-1 product-item__title"><a href="" class="text-blue font-weight-bold">{{ product.title }}</a></h5>
+                                                <div class="mb-2">
+                                                    <a href="{% url 'product_detail' pk=product.pk %}" class="d-block text-center"><img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}" style="width: 160px; height: 100px;"></a>
+                                                </div>
+                                                <div class="flex-center-between mb-1">
+                                                    <div class="prodcut-price">
+                                                        <div class="text-gray-100">${{ product.total_price }}</div>
+                                                    </div>
+                                                    <form method="post" action="{% url 'add_to_cart' pk=product.pk %}">
+                                                        {% csrf_token %}
+                                                        <div class="d-none d-xl-block prodcut-add-cart">
+                                                            <button type="submit" class="btn-add-cart btn-primary transition-3d-hover">
+                                                                <i class="ec ec-add-to-cart"></i>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                            <div class="tab-pane fade pt-2" id="pills-three-example1" role="tabpanel" aria-labelledby="pills-three-example1-tab" data-target-group="groups">
+                                <ul class="row list-unstyled products-group no-gutters">
+                                    {% for product in products|slice:":6" %}
+                                    {% if product.level == 'P' %}
+                                    <li class="col-6 col-md-4 col-lg-3 col-xl product-item">
+                                        <div class="product-item__outer h-100">
+                                            <div class="product-item__inner px-xl-4 p-3">
+                                                <div class="product-item__body pb-xl-2">
+                                                    <div class="mb-2"><a href="#" class="font-size-12 text-gray-5">{{ product.categories }}</a></div>
+                                                    <h5 class="mb-1 product-item__title"><a href="{% url 'product_detail' pk=product.pk %}" class="text-blue font-weight-bold">{{ product.title }}</a></h5>
+                                                    <div class="mb-2">
+                                                        <a href="" class="d-block text-center"><img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.title }}"style="width: 160px; height: 100px;"></a>
+                                                    </div>
+                                                    <div class="flex-center-between mb-1">
+                                                        <div class="prodcut-price">
+                                                            <div class="text-gray-100">${{ product.total_price }}</div>
+                                                        </div>
+                                                        <form method="post" action="{% url 'add_to_cart' pk=product.pk %}">
+                                                            {% csrf_token %}
+                                                            <div class="d-none d-xl-block prodcut-add-cart">
+                                                                <button type="submit" class="btn-add-cart btn-primary transition-3d-hover">
+                                                                    <i class="ec ec-add-to-cart"></i>
+                                                                  </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+        
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Tab Content -->
+                    </div>
+
+
+
+
+
+  
+        </main>
+        <!-- ========== END MAIN CONTENT ========== -->
+        {% endblock content %}

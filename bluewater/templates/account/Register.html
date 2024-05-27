@@ -1,0 +1,101 @@
+{% extends 'header-footer.html' %}
+{% load static %}
+{% block title %}bdtechnicalschools/home{% endblock title %}
+
+{% block content %}
+        <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main">
+        <div class="container">
+            <div class="mb-4">
+                <h1 class="text-center">Register Here...</h1>
+                {% if messages %}
+                <ul>
+                  {% for message in messages %}
+                  <li class="{% if message.tags %}alert {{ message.tags }}{% else %}text-info{% endif %}">
+                    {{ message }}
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="my-4 my-xl-8">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 mb-8 mb-md-0">
+                        <!-- Title -->
+                        <div class="border-bottom border-color-1 mb-6">
+                            <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Register</h3>
+                        </div>
+                        <p class="text-gray-90 mb-4">Welcome! Sign up to your account.</p>
+                        <!-- End Title -->
+                        <form class="js-validate" novalidate="novalidate" method="post" action="{% url 'register' %}">
+                            {% csrf_token %}
+                            <!-- Form Group -->
+                            <div class="js-form-message form-group">
+                                <label class="form-label" for="id_username">Username
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control" name="username" id="id_username" placeholder="Username" aria-label="Username" required
+                                    data-msg="Please enter a valid username."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                            </div>
+                            <div class="js-form-message form-group">
+                                <label class="form-label" for="id_email">Email
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control" name="email" id="id_email" placeholder="Email" aria-label="Email address" required
+                                    data-msg="Please enter a valid email address."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                            </div>
+                            <!-- End Form Group -->
+
+                            <!-- Form Group -->
+                            <div class="js-form-message form-group">
+                                <label class="form-label" for="id_password1">Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" name="password1" id="id_password1" placeholder="Password" aria-label="Password" required
+                                    data-msg="Your password is invalid. Please try again."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                            </div>
+
+                            <div class="js-form-message form-group">
+                                <label class="form-label" for="id_password2">Confirm Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" name="password2" id="id_password2" placeholder="Confirm Password" aria-label="Confirm Password" required
+                                    data-msg="Please confirm your password."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                            </div>
+                            <!-- End Form Group -->
+
+                            <!-- Checkbox -->
+                            <div class="js-form-message mb-3">
+                                <div class="custom-control custom-checkbox d-flex align-items-center">
+                                    <input type="checkbox" class="custom-control-input" id="rememberCheckbox" name="rememberCheckbox" required
+                                        data-error-class="u-has-error"
+                                        data-success-class="u-has-success">
+                                    <label class="custom-control-label form-label" for="rememberCheckbox">
+                                        Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- End Checkbox -->
+
+                            <!-- Button -->
+                            <div class="mb-1">
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary-dark-w px-5">Register</button>
+                                </div>
+                                <div class="mb-2">
+                                    <a class="text-blue" href="#">Lost your password?</a>
+                                </div>
+                            </div>
+                            <!-- End Button -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+        <!-- ========== END MAIN CONTENT ========== -->
+        {% endblock content %}
